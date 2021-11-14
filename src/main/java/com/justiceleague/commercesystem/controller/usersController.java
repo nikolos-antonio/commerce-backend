@@ -15,9 +15,9 @@ public class usersController {
     private userService userService;
 
     @PostMapping("/")
-    public String add(@RequestBody users user){
+    public users add(@RequestBody users user){
         userService.saveUser(user);
-        return "New user is added";
+        return user;
     }
 
     @GetMapping("/")
