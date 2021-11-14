@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class justiceleague {
+public class users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class justiceleague {
     private String email;
     private String password;
 
-    public justiceleague() {
+    public users() {
     }
 
     public int getId() {
