@@ -1,7 +1,7 @@
 package com.justiceleague.commercesystem.controller;
 
-import com.justiceleague.commercesystem.model.reservations;
-import com.justiceleague.commercesystem.service.reservationsService;
+import com.justiceleague.commercesystem.model.Reservation;
+import com.justiceleague.commercesystem.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,13 +9,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
-public class reservationsController {
+public class ReservationController {
 
     @Autowired
-    private reservationsService reservationService;
+    private ReservationService reservationService;
 
     @GetMapping("/")
-    public List<reservations> getAllReservations() {
+    public List<Reservation> getAllReservations() {
         return reservationService.getAllReservations();
     }
 }

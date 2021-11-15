@@ -3,14 +3,19 @@ package com.justiceleague.commercesystem.model;
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
-public class cubicles {
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String building;
-    private int floor;
+    private String email;
+    private String password;
+
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -28,19 +33,19 @@ public class cubicles {
         this.name = name;
     }
 
-    public String getBuilding() {
-        return building;
+    public String getEmail() {
+        return email;
     }
 
-    public void setBuilding(String building) {
-        this.building = building;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getFloor() {
-        return floor;
+    public String getPassword() {
+        return password;
     }
 
-    public void setFloor(int floor) {
-        this.floor = floor;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
