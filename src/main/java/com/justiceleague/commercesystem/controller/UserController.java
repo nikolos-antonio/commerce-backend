@@ -1,5 +1,6 @@
 package com.justiceleague.commercesystem.controller;
 
+import com.justiceleague.commercesystem.model.Reservation;
 import com.justiceleague.commercesystem.model.User;
 import com.justiceleague.commercesystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,11 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Integer id) {
         return userService.getUser(id);
+    }
+
+    @GetMapping("/{id}/reservations")
+    public List<Reservation> getUserReservations(@PathVariable("id") Integer id) {
+        return userService.getUserReservations(id);
     }
 
 }
