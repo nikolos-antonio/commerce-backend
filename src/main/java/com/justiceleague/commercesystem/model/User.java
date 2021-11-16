@@ -1,11 +1,13 @@
 package com.justiceleague.commercesystem.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @Entity
-public class users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +16,7 @@ public class users {
     private String email;
     private String password;
 
-    public users() {
+    public User() {
     }
 
     public int getId() {

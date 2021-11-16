@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class reservations {
+public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -12,26 +12,26 @@ public class reservations {
     private Date end_date;
 
     @ManyToOne
-    @JoinColumn(name = "users_id", referencedColumnName = "id")
-    private users user;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "cubicles_id", referencedColumnName = "id")
-    private cubicles cubicle;
+    @JoinColumn(name = "cubicle_id", referencedColumnName = "id")
+    private Cubicle cubicle;
 
-    public users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public cubicles getCubicle() {
+    public Cubicle getCubicle() {
         return cubicle;
     }
 
-    public void setCubicle(cubicles cubicle) {
+    public void setCubicle(Cubicle cubicle) {
         this.cubicle = cubicle;
     }
 
