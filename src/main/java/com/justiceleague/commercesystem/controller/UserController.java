@@ -32,13 +32,13 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public String auth(@RequestBody User user) {
+    public User auth(@RequestBody User user) {
         User oauthUser = userService.login(user.getEmail(), user.getPassword());
 
         if(Objects.nonNull(oauthUser)){
-            return "redirect:/"; // go to home page (change later)
+            return oauthUser;
         } else {
-            return "redirect:/login"; // go to login page (change later)
+            throw new IllegalArgumentException("No user with that email and password");
         }
     }
 

@@ -15,6 +15,6 @@ public interface CubicleRepo extends JpaRepository<Cubicle, Integer> {
     @Query(value = "SELECT * FROM cubicle where cubicle.id = :id", nativeQuery = true)
     Cubicle getCubicleById(@Param("id") Integer id);
 
-    @Query(value = "SELECT * FROM cubicle WHERE cubicle.id not in (SELECT cubicle_id FROM reservation WHERE :start_date <= reservation.end_date AND :end_date >= reservation.start_date", nativeQuery = true)
+    @Query(value = "SELECT * FROM cubicle WHERE cubicle.id NOT IN (SELECT cubicle_id FROM reservation WHERE :start_date <= reservation.end_date AND :end_date >= reservation.start_date);", nativeQuery = true)
     List<Cubicle> getAvailableCubicles(@Param("start_date") Date start_date, @Param("end_date") Date end_date);
 }
