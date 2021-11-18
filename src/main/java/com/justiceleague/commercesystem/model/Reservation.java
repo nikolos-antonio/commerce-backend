@@ -1,5 +1,7 @@
 package com.justiceleague.commercesystem.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,7 +10,9 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date start_date;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date end_date;
 
     @ManyToOne
