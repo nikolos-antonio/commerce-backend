@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -44,13 +46,24 @@ public class ReservationController {
             MediaType.APPLICATION_JSON_VALUE
     })
     public void saveReservation(@RequestBody ReservationInsertionRequest reservationInsertionRequest) {
-        Reservation reservation = new Reservation();
-        reservation.setUser(userService.getUser(reservationInsertionRequest.getUser_id()));
-        reservation.setCubicle(cubicleService.getCubicleById(reservationInsertionRequest.getCubicle_id()));
-        reservation.setStart_date(reservationInsertionRequest.getStart_date());
-        reservation.setEnd_date(reservationInsertionRequest.getEnd_date());
+        LocalDate currentDate = LocalDate.now();
+        Date currentDatePlusThreeMonths = Date.from(currentDate.plusMonths(3).atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date currentDatePlusSixMonths = Date.from(currentDate.plusMonths(6).atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        reservationService.saveReservation(reservation);
+        if (reservationInsertionRequest.getStart_date().after(currentDatePlusThreeMonths)) {
+            throw new IllegalArgumentException("Start date can not be farther than 3 months in advance");
+        } else if (reservationInsertionRequest.getEnd_date().after(currentDatePlusSixMonths)){
+            throw new IllegalArgumentException("End date can not be farther than 6 months in advance");
+        } else {
+
+            Reservation reservation = new Reservation();
+            reservation.setUser(userService.getUser(reservationInsertionRequest.getUser_id()));
+            reservation.setCubicle(cubicleService.getCubicleById(reservationInsertionRequest.getCubicle_id()));
+            reservation.setStart_date(reservationInsertionRequest.getStart_date());
+            reservation.setEnd_date(reservationInsertionRequest.getEnd_date());
+
+            reservationService.saveReservation(reservation);
+        }
     }
 
     @DeleteMapping("/{id}")
