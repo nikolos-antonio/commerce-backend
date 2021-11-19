@@ -46,24 +46,14 @@ public class ReservationController {
             MediaType.APPLICATION_JSON_VALUE
     })
     public void saveReservation(@RequestBody ReservationInsertionRequest reservationInsertionRequest) {
-        LocalDate currentDate = LocalDate.now();
-        LocalDate currentDatePlusThreeMonths = currentDate.plusMonths(3);
-        LocalDate currentDatePlusSixMonths = currentDate.plusMonths(6);
 
-        if (reservationInsertionRequest.getStart_date().isAfter(currentDatePlusThreeMonths)) {
-            throw new IllegalArgumentException("Start date can not be farther than 3 months in advance");
-        } else if (reservationInsertionRequest.getEnd_date().isAfter(currentDatePlusSixMonths)){
-            throw new IllegalArgumentException("End date can not be farther than 6 months in advance");
-        } else {
+        Reservation reservation = new Reservation();
+        reservation.setUser(userService.getUser(reservationInsertionRequest.getUser_id()));
+        reservation.setCubicle(cubicleService.getCubicleById(reservationInsertionRequest.getCubicle_id()));
+        reservation.setStart_date(reservationInsertionRequest.getStart_date());
+        reservation.setEnd_date(reservationInsertionRequest.getEnd_date());
 
-            Reservation reservation = new Reservation();
-            reservation.setUser(userService.getUser(reservationInsertionRequest.getUser_id()));
-            reservation.setCubicle(cubicleService.getCubicleById(reservationInsertionRequest.getCubicle_id()));
-            reservation.setStart_date(reservationInsertionRequest.getStart_date());
-            reservation.setEnd_date(reservationInsertionRequest.getEnd_date());
-
-            reservationService.saveReservation(reservation);
-        }
+        reservationService.saveReservation(reservation);
     }
 
     @DeleteMapping("/{id}")
