@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Date;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -47,12 +47,12 @@ public class ReservationController {
     })
     public void saveReservation(@RequestBody ReservationInsertionRequest reservationInsertionRequest) {
         LocalDate currentDate = LocalDate.now();
-        Date currentDatePlusThreeMonths = Date.from(currentDate.plusMonths(3).atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date currentDatePlusSixMonths = Date.from(currentDate.plusMonths(6).atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate currentDatePlusThreeMonths = currentDate.plusMonths(3);
+        LocalDate currentDatePlusSixMonths = currentDate.plusMonths(6);
 
-        if (reservationInsertionRequest.getStart_date().after(currentDatePlusThreeMonths)) {
+        if (reservationInsertionRequest.getStart_date().isAfter(currentDatePlusThreeMonths)) {
             throw new IllegalArgumentException("Start date can not be farther than 3 months in advance");
-        } else if (reservationInsertionRequest.getEnd_date().after(currentDatePlusSixMonths)){
+        } else if (reservationInsertionRequest.getEnd_date().isAfter(currentDatePlusSixMonths)){
             throw new IllegalArgumentException("End date can not be farther than 6 months in advance");
         } else {
 
