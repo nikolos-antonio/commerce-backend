@@ -1,12 +1,13 @@
 package com.justiceleague.commercesystem.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ReservationInsertionRequest {
     private Integer user_id;
     private Integer cubicle_id;
-    private Date start_date;
-    private Date end_date;
+    private LocalDate start_date;
+    private LocalDate end_date;
 
     public Integer getUser_id() {
         return user_id;
@@ -24,19 +25,19 @@ public class ReservationInsertionRequest {
         this.cubicle_id = cubicle_id;
     }
 
-    public Date getStart_date() {
+    public LocalDate getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(LocalDate start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public LocalDate getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
     }
 }
